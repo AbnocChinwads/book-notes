@@ -20,10 +20,21 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true })); // Allows us to pass webpage information to the server
 app.use(express.static("public")); // Allows use of static files with expressjs
 
+let books = [];
+
+async function getList() {
+  const result = await db.query("SELECT book_review FROM reviews JOIN books ON books.id = reviews.id");
+  books = result.rows;
+  return books;
+}
+
 // Initial call to display main page
 
-app.get("/", (req, res) => {
-    res.render("index.ejs");
+app.get("/", async (req, res) => {
+  const reviewList = await getList();
+  res.render("index.ejs", {
+    bookItems: books,
+  });
 })
 
 app.listen(port, () => {

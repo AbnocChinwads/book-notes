@@ -1,5 +1,9 @@
 <%- include('partials/header.ejs'); -%>
 
-Hello World!
+<% for( let book of books ) { %>
+    <h2><%= book.title %></h2>
+    <p><%= book.author %></p>
+    <p><%= book.review %></p>
+<% } %>
 
 <%- include('partials/footer.ejs'); -%>
