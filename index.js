@@ -21,19 +21,30 @@ app.use(bodyParser.urlencoded({ extended: true })); // Allows us to pass webpage
 app.use(express.static("public")); // Allows use of static files with expressjs
 
 let books = [];
+let reviews = [];
 
 async function getList() {
-  const result = await db.query("SELECT book_review FROM reviews JOIN books ON books.id = reviews.id");
+  const result = await db.query("SELECT * FROM books");
   books = result.rows;
   return books;
+}
+
+async function getReviews() {
+  const result = await db.query("SELECT book_review FROM reviews JOIN books ON books.id = reviews.id");
+  reviews = result.rows;
+  return reviews;
 }
 
 // Initial call to display main page
 
 app.get("/", async (req, res) => {
-  const reviewList = await getList();
+  const bookList = await getList();
+  const reviewList = await getReviews();
+  console.log(bookList);
+  console.log(reviewList);
   res.render("index.ejs", {
-    bookItems: books,
+    bookItems: bookList,
+    reviewList: reviewList,
   });
 })
 
