@@ -20,19 +20,25 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true })); // Allows us to pass webpage information to the server
 app.use(express.static("public")); // Allows use of static files with expressjs
 
-let books = [];
+let bookId = 1;
 let reviews = [];
 
 async function getList() {
   const result = await db.query("SELECT * FROM books");
-  books = result.rows;
+  let books = [];
+  result.rows.forEach((book) => {
+    books.push(book);
+  });
   return books;
 }
 
 async function getReviews() {
-  const result = await db.query("SELECT book_review FROM reviews JOIN books ON books.id = reviews.id");
+  const result = await db.query(
+    "SELECT book_review FROM reviews JOIN books ON reviews.id = book_id WHERE book_id = $1",
+    [bookId]
+  );
   reviews = result.rows;
-  return reviews;
+  return reviews.find((reviews) => reviews.id == bookId);
 }
 
 // Initial call to display main page
@@ -40,12 +46,17 @@ async function getReviews() {
 app.get("/", async (req, res) => {
   const bookList = await getList();
   const reviewList = await getReviews();
+  console.log(reviews);
   res.render("index.ejs", {
     bookItems: bookList,
     reviewList: reviewList,
   });
-})
+});
+
+app.post("/add", async (req, res) => {
+  res.redirect("/");
+});
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
+  console.log(`Server running on http://localhost:${port}`);
+});

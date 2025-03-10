@@ -1,11 +1,15 @@
 <%- include('partials/header.ejs'); -%>
 
-<% for( let book of bookItems ) { %>
-    <h4>Title: <%= book.book_name %></h2>
-    <p>Author: <%= book.book_author %></p>
-    <% for( let review of reviewList ) { %>
-        <p>My Review: <%= review.book_review %></p>
-    <% } %>
-<% } %>
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row">
+                <% for( let book of bookItems ) { %>
+                    <h4>Title: <%= book.book_name %></h4>
+                    <p><strong>Author: <%= book.book_author %></strong></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
 
-<%- include('partials/footer.ejs'); -%>
+
+    <%- include('partials/footer.ejs'); -%>
