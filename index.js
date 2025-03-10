@@ -40,8 +40,6 @@ async function getReviews() {
 app.get("/", async (req, res) => {
   const bookList = await getList();
   const reviewList = await getReviews();
-  console.log(bookList);
-  console.log(reviewList);
   res.render("index.ejs", {
     bookItems: bookList,
     reviewList: reviewList,
