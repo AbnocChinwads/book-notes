@@ -1,13 +1,22 @@
 <%- include('partials/header.ejs'); -%>
 
     <div class="container-fluid">
-        <div class="col">
-            <div class="row">
-                <% for( let book of bookItems ) { %>
-                    <h4>Title: <%= book.book_name %></h4>
-                    <p><strong>Author: <%= book.book_author %></strong></p>
-                <% } %>
-            </div>
+        <div class="row">
+            <% bookItems.forEach(function(book) { %>
+                <div class="col-2">
+                    <img src="" alt="cover of <%= book.book_name %>" aria-label="cover of <%= book.book_name %>">
+                </div>
+                <div class="col-10" id="<%= book.id %>">
+                    <h3>#: <%= book.id %></h3>
+                    <h4>Title: <%= book.book_name %>
+                    </h4>
+                    <h5><strong>Author:</strong> <%= book.book_author %></h5>
+                    <h5>My Review:</h5>
+                    <p class="py-5">
+                        <%= book.review %>
+                    </p>
+                </div>
+                <% }) %>
         </div>
     </div>
 
