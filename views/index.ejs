@@ -1,12 +1,12 @@
 <%- include('partials/header.ejs'); -%>
 
-    <div class="container-fluid pt-5">
+    <div class="container-fluid p-5">
         <div class="row">
             <% bookItems.forEach(function(book) { %>
-                <div class="col-2">
-                    <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>.jpg" alt="cover of <%= book.book_name %>" aria-label="cover of <%= book.book_name %>">
+                <div class="col-2 ps-5">
+                    <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="cover of <%= book.book_name %>" aria-label="cover of <%= book.book_name %>"/>
                 </div>
-                <div class="col-10" id="<%= book.id %>">
+                <div class="col-2 py-2" id="<%= book.id %>">
                     <h3># <%= book.id %>
                     </h3>
                     <h4>Title: <div class="col-6 py-2 ps-2"><%= book.book_name %></div>
@@ -14,11 +14,14 @@
                     <h5><strong>Author:</strong>
                         <div class="col-6 py-2 ps-2"><%= book.book_author %></div>
                     </h5>
+                </div>
+                <div class="col-2">
                     <p>
                         <strong>My Thoughts On The Book:</strong> 
                         <div class="col-6 py-2 ps-2"><%= book.book_review %></div>
                     </p>
                 </div>
+                <div class="w-100"></div>
                 <% }) %>
         </div>
     </div>

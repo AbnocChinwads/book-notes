@@ -20,8 +20,6 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true })); // Allows us to pass webpage information to the server
 app.use(express.static("public")); // Allows use of static files with expressjs
 
-let bookId = 1;
-
 /*
   This is the function to pull all the information from the server
   and push it to a list that the ejs files can read from to display
@@ -29,7 +27,7 @@ let bookId = 1;
 */
 
 async function getList() {
-  const result = await db.query("SELECT * FROM books");
+  const result = await db.query("SELECT * FROM books ORDER BY id ASC");
   let books = [];
   result.rows.forEach((book) => {
     books.push(book);
