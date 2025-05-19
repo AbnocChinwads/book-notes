@@ -44,7 +44,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.post("/add", async (req, res) => {
+app.post("/add-book", async (req, res) => {
   res.redirect("/");
 });
 

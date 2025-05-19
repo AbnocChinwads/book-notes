@@ -21,10 +21,22 @@
                         <div class="col-6 py-2 ps-2"><%= book.book_review %></div>
                     </p>
                 </div>
+                <div class="col-2">
+                    <div class="col-2">
+                        <a href="/delete-book" class="btn btn-danger">Delete Book</a>
+                    </div>
+                    <div class="col-2">
+                        <a href="/update-book" class="btn btn-warning">Update Book</a>
+                    </div>
+                </div>
                 <div class="w-100"></div>
                 <% }) %>
         </div>
+        <div class="row justify-content-center py-5">
+            <div class="col-2">
+                <a href="/add-book" class="btn btn-primary">Add Book</a>
+            </div>
+        </div>
     </div>
-
 
     <%- include('partials/footer.ejs'); -%>
